@@ -10,27 +10,41 @@ import UIKit
 
 class MultiSelectTableViewController: UITableViewController {
 
-  let toDos = ["Go biking", "Italian Groceries", "Fix heating", "Install dimmer", "Pick up books"]
+  let toDoStore = UserDefaults(suiteName: "MultiSelectTable")
+  var toDos = [String]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.initializeToDoList()
 
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  func initializeToDoList() {
+    if let defaults = self.toDoStore?.array(forKey: "toDos") as? [String] {
+      self.toDos = defaults
+    } else {
+      self.toDos = ["Go biking", "Italian Groceries", "Fix heating", "Install dimmer", "Pick up books"]
+      self.toDoStore?.set(self.toDos, forKey: "toDos")
+    }
   }
-
-  // MARK: - Table view data source
 
   override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
+  }
+
+  override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    return UITableViewCellEditingStyle.none
+  }
+
+  override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    let todo = self.toDos.remove(at: sourceIndexPath.row)
+    self.toDos.insert(todo, at: destinationIndexPath.row)
+    self.toDoStore?.set(self.toDos, forKey: "toDos")
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
