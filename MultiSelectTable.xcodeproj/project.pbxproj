@@ -10,6 +10,7 @@
 		45D5A7EE1E7BE02100F49B29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5A7ED1E7BE02100F49B29 /* AppDelegate.swift */; };
 		45D5A7F31E7BE02100F49B29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D5A7F11E7BE02100F49B29 /* Main.storyboard */; };
 		45D5A7F51E7BE02100F49B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45D5A7F41E7BE02100F49B29 /* Assets.xcassets */; };
+		45D5A8001E7BE52F00F49B29 /* MultiSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5A7FF1E7BE52F00F49B29 /* MultiSelectTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		45D5A7F21E7BE02100F49B29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45D5A7F41E7BE02100F49B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45D5A7F91E7BE02100F49B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45D5A7FF1E7BE52F00F49B29 /* MultiSelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			children = (
 				45D5A7ED1E7BE02100F49B29 /* AppDelegate.swift */,
 				45D5A7F11E7BE02100F49B29 /* Main.storyboard */,
+				45D5A7FF1E7BE52F00F49B29 /* MultiSelectTableViewController.swift */,
 				45D5A7F41E7BE02100F49B29 /* Assets.xcassets */,
 				45D5A7F91E7BE02100F49B29 /* Info.plist */,
 			);
@@ -131,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45D5A7EE1E7BE02100F49B29 /* AppDelegate.swift in Sources */,
+				45D5A8001E7BE52F00F49B29 /* MultiSelectTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
