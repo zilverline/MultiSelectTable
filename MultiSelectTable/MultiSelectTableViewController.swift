@@ -10,6 +10,8 @@ import UIKit
 
 class MultiSelectTableViewController: UITableViewController {
 
+  let toDos = ["Go biking", "Italian Groceries", "Fix heating", "Install dimmer", "Pick up books"]
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -28,24 +30,20 @@ class MultiSelectTableViewController: UITableViewController {
   // MARK: - Table view data source
 
   override func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 0
+    return 1
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    return 0
+    return toDos.count
   }
 
-  /*
-   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-   let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-   // Configure the cell...
+    cell.textLabel?.text = self.toDos[indexPath.row]
 
-   return cell
-   }
-   */
+    return cell
+  }
 
   /*
    // Override to support conditional editing of the table view.
@@ -91,5 +89,5 @@ class MultiSelectTableViewController: UITableViewController {
    // Pass the selected object to the new view controller.
    }
    */
-
+  
 }
