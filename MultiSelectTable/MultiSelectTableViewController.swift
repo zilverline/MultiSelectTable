@@ -12,12 +12,14 @@ class MultiSelectTableViewController: UITableViewController {
 
   let toDoStore = UserDefaults(suiteName: "MultiSelectTable")
   var toDos = [String]()
+  var hiddenToDos = Set<String>()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     self.initializeToDoList()
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem
+    self.tableView.allowsMultipleSelectionDuringEditing = true
   }
 
   func initializeToDoList() {
@@ -48,15 +50,47 @@ class MultiSelectTableViewController: UITableViewController {
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return toDos.count
+    var nrOfRows = self.toDos.count
+    if !self.isEditing {
+      nrOfRows -= self.hiddenToDos.count
+    }
+    return nrOfRows
+  }
+
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    tableView.setEditing(editing, animated: true)
+
+    self.tableView.reloadData()
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-    cell.textLabel?.text = self.toDos[indexPath.row]
+    if self.isEditing {
+      cell.textLabel?.text = self.toDos[indexPath.row]
+      if !self.hiddenToDos.contains(self.toDos[indexPath.row]) {
+        self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.none)
+      }
+      let bgColorView = UIView()
+      bgColorView.backgroundColor = UIColor.white
+      cell.selectedBackgroundView = bgColorView
+    } else {
+      let todosWithHiddenItemsSkipped = self.toDos.filter { todo in
+        !self.hiddenToDos.contains(todo)
+      }
+      cell.textLabel?.text = todosWithHiddenItemsSkipped[indexPath.row]
+    }
 
     return cell
+  }
+
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.hiddenToDos.remove(self.toDos[indexPath.row])
+  }
+
+  override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    self.hiddenToDos.insert(self.toDos[indexPath.row])
   }
 
   /*
